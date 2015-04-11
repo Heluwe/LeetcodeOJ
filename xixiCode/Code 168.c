@@ -11,7 +11,7 @@ char *convertToTitle(int n)
 	p = s;
 	while (n)
 	{
-		*(p + --size) = 'A' + (n - 1) % 26;//carry from low to high,it's special to s string,so use size is important thing.
+		*(p + --size) = 'A' + (n - 1) % 26;//carry from right to left,it's special to s string,so use size is important thing.
 		if (n == 26)
 			return s;
 		else
