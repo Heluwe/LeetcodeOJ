@@ -1,16 +1,13 @@
-char *convertToTitle(int n)
-{
+char *convertToTitle(int n){
 	char *s, *p;
 	int size = 0, num = n;
-	while (num)
-	{
+	while (num){
 		num = (num - 1) / 26;
 		size++;
 	}
 	s = (char *)malloc(sizeof(char)*size);
 	p = s;
-	while (n)
-	{
+	while (n){
 		*(p + --size) = 'A' + (n - 1) % 26;//carry from right to left,it's special to s string,so use size is important thing.
 		if (n == 26)
 			return s;

@@ -1,6 +1,5 @@
 public class Solution {
-	public List<List<Integer>> generate(int numRows)
-	{
+	public List<List<Integer>> generate(int numRows){
 		List<List<Integer>> triangle = new ArrayList<List<Integer>>();
 		for (int i = 0; i < numRows; i++) {
 			List<Integer> rows = new ArrayList<Integer>();

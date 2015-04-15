@@ -1,0 +1,59 @@
+
+*************   C     ************
+/**
+* Definition for binary tree
+* struct TreeNode {
+*     int val;
+*     struct TreeNode *left;
+*     struct TreeNode *right;
+* };
+*/
+
+int minDepth(struct TreeNode *root)
+{
+	int m = 0, n = 0;
+	if (root == NULL) return 0;
+	m = minDepth(root->left);
+	n = minDepth(root->right);
+	return !m || !n ? m + n + 1 : (m < n ? m : n) + 1;
+}
+
+
+************    Java   ***********
+/**
+* Definition for binary tree
+* public class TreeNode {
+*     int val;
+*     TreeNode left;
+*     TreeNode right;
+*     TreeNode(int x) { val = x; }
+* }
+*/
+public class Solution {
+	public int minDepth(TreeNode root) {
+		if (root == null)return 0;
+		Queue<TreeNode> Q = new LinkedList<TreeNode>();
+		TreeNode t = new TreeNode(1);
+		TreeNode q;
+		int level = 1;
+		if (Q.isEmpty())
+			Q.add(root);
+		Q.add(t);
+		while (!Q.isEmpty()) {
+			q = Q.poll();
+			if (q.equals(t)) {
+				level++;
+				q = Q.poll();
+			}
+			if (q.left != null)
+				Q.add(q.left);
+			if (q.right != null)
+				Q.add(q.right);
+			if (Q.peek() != null&&Q.peek().equals(t))
+				Q.add(t);
+			if (q.right == null&&q.left == null)
+				return level;
+		}
+		return 0;
+	}
+}
