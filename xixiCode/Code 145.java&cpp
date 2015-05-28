@@ -1,0 +1,80 @@
+
+/********************  Java  ********************/
+/**
+* Definition for a binary tree node.
+* public class TreeNode {
+*     int val;
+*     TreeNode left;
+*     TreeNode right;
+*     TreeNode(int x) { val = x; }
+* }
+*/
+public class Solution {
+	public List<Integer> postorderTraversal(TreeNode root) {
+		TreeNode tmp = root;
+		List<Integer> res = new ArrayList<Integer>();
+		Stack<TreeNode> node = new Stack<TreeNode>();
+		while (root != null || !node.isEmpty()) {
+			if (root == null) {
+				if ((root= node.peek().right) == null) {
+					root = node.pop(); res.add(root.val);
+					if (tmp == root)return res;
+					if (!node.empty()) {
+						while (root == node.peek().right) {
+							root = node.pop(); res.add(root.val);
+							if (tmp == root)return res;
+						}// 1,null,2,null,3,null,4...
+						root = node.peek().right;// 1,2
+					}
+					else return res;
+				}
+			}
+			else {
+				node.push(root);
+				root = root.left;
+			}
+		}
+		return res;
+	}
+}
+
+
+/********************   C++  ********************/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+	vector<int> postorderTraversal(TreeNode* root) {
+		TreeNode *tmp = root;
+		vector<int> res;
+		stack<TreeNode*> node;
+		while (root != NULL || !node.empty()) {
+			if (root == NULL) {
+				if ((root = node.top()->right) == NULL) {
+					root = node.top(); node.pop(); res.push_back(root->val);
+					if (tmp == root)return res;
+					if (!node.empty()) {
+						while (root == node.top()->right) {
+							root = node.top(); node.pop(); res.push_back(root->val);
+							if (tmp == root)return res;
+						}// 1,null,2,null,3,null,4...
+						root = node.top()->right;// 1,2
+					}
+					else return res;
+				}
+			}
+			else {
+				node.push(root);
+				root = root->left;
+			}
+		}
+		return res;
+	}
+};
